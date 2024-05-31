@@ -2,14 +2,14 @@ import { Box, Container, Flex, Input, VStack, Text, Spacer, Heading, HStack, Ava
 import { useState } from "react";
 
 const mockChats = [
-  { id: 1, name: "John Doe", message: "Hello there!" },
-  { id: 2, name: "Jane Smith", message: "Hi, how are you?" },
-  { id: 3, name: "John Doe", message: "I'm good, thanks!" },
-  { id: 4, name: "Jane Smith", message: "That's great to hear." },
+  { id: 1, name: "John Doe", messages: [] },
+  { id: 2, name: "Jane Smith", messages: [] },
+  { id: 3, name: "John Doe", messages: [] },
+  { id: 4, name: "Jane Smith", messages: [] },
 ];
 
 const Index = () => {
-  const [selectedChat, setSelectedChat] = useState(mockChats[0]);
+  const [selectedChat, setSelectedChat] = useState({ ...mockChats[0], messages: [] });
   const [messageInput, setMessageInput] = useState("");
 
   const handleChatSelection = (chat) => {
@@ -18,8 +18,8 @@ const Index = () => {
 
   const handleSendMessage = () => {
     if (messageInput.trim() !== "") {
-      const newMessage = { id: selectedChat.id, name: "You", message: messageInput };
-      setSelectedChat({ ...selectedChat, message: [...selectedChat.message, newMessage] });
+      const newMessage = { name: "You", message: messageInput };
+      setSelectedChat({ ...selectedChat, messages: [...selectedChat.messages, newMessage] });
       setMessageInput("");
     }
   };
